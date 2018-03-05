@@ -102,3 +102,58 @@ java代码
 			return str.toString();
 		}
 	}
+	
+#3
+题目描述
+输入一个链表，从尾到头打印链表每个节点的值。
+
+    public class Solution {
+		ArrayList<Integer> arrayList = new ArrayList<Integer>();
+		public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+			if (listNode != null) {
+				this.printListFromTailToHead(listNode.next);
+				arrayList.add(listNode.val);
+			}
+			return arrayList;
+		}
+	}
+
+	public class ListNode {
+		int val;
+		ListNode next = null;
+
+		ListNode(int val) {
+			this.val = val;
+		}
+	}
+
+```
+ 此方法主要是通过java的jvm中的java虚拟机栈来实现递归调用，而不必重新创建java.util.stack类的对象；
+ 在虚拟机栈中 每个方法被执行时都会创建一个栈帧，
+ 因此递归到最后导致：最后一个链表结点是第一个入栈的；
+ 而小细节  ArrayList必须是全局变量，不这么做的话每次递归调用会重新创建ArrayList，而我们的目的是为了返回一个ArrayList；
+ 
+```
+###方法2
+
+    import java.util.ArrayList;
+    import java.util.Stack;
+    public class Solution2 {
+	public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+		Stack<Integer> stack = new Stack<Integer>();
+		while (listNode != null) {
+			stack.push(listNode.val);
+			listNode = listNode.next;
+		}
+
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while (!stack.isEmpty()) {
+			list.add(stack.pop());
+		}
+		return list;
+	}
+	}
+	
+```
+ 此方法是创建了一个util中的stack类来实现的
+```
