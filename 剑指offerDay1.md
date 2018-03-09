@@ -214,3 +214,34 @@ java代码
  这题好难。。。。。前序中序的索引 总是不对；
  
 ```
+
+#5
+题目描述
+用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
+
+    class Solution {
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+    
+    public void push(int node) {
+       stack1.push(node);
+    }
+    
+    public int pop() {
+        int a;
+        if(stack2.empty()){
+            while(!stack1.empty()){
+               a = stack1.pop();
+                stack2.push(a);
+            } ;
+            
+        };
+        a = stack2.pop();
+        
+        return a ;
+    }
+}
+```
+ 这题的话。。比较简单  主要是要判断 pop时栈2为空  和不为空的情况；
+ 为空时：必须要把栈1的全部元素压入到栈2中
+```
