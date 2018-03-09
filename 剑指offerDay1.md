@@ -245,3 +245,42 @@ java代码
  这题的话。。比较简单  主要是要判断 pop时栈2为空  和不为空的情况；
  为空时：必须要把栈1的全部元素压入到栈2中
 ```
+
+#6
+
+题目描述
+把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0
+
+
+    import java.util.ArrayList;
+    public class Solution {
+    public int minNumberInRotateArray(int [] array) {
+       int left = 0 ; int right = array.length-1;
+        while(left < right){
+           int mid = left+ (right-left)/2;
+            if(array[right] < array[mid]){
+                left = mid + 1 ;
+            }else if(array[right] == array[mid]){
+                 right = right - 1 ;
+            }else{
+                right = mid;
+            };
+        };
+        return array[right];
+    }
+    }
+
+
+
+```
+ 这题 若是从头到尾遍历的话则复杂度为O（n）但是明显没有利用到旋转数组的性质；
+ 小细节：int a = 7/2 = 3  而不是3.5  向下取整;
+```
+##重点！！！！！！
+```
+int middle=(low + high)/2 ; 存在整数溢出的风险，应改为
+int middle=low + (high-low)/2 ;
+这个人家回复是正确的。因为int是4字节，有一定范围。如果两个其中一个很大，相加容易超出这个范围，改成相减的形式可以一定程度避免。这种写法值得推崇！
+---------------
+还有二分查找指的是第一次二分后面都是递加1！！！！！
+```
