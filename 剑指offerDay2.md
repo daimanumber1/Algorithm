@@ -43,7 +43,8 @@ n<=39
 题目描述
 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。
 
-
+288ms
+    
     class Solution {
     public int JumpFloor(int target) {
         if(target == 1){
@@ -57,6 +58,25 @@ n<=39
     }
 }
 
+##方法2    28ms  快了10倍
+    public class Solution {
+    public int JumpFloor(int target) {
+          if(target<3){
+              return target;
+          }
+        int f1 = 1,f2=2,f3=0;
+        for(int i=1;i<=target-2;i++){
+            f3=f1+f2;
+            f1 = f2;
+            f2 = f3;
+            
+        };
+        return f3;
+    }
+}
+
+
+
 ```
 对于本题,前提只有 一次 1阶或者2阶的跳法。
 a.如果两种跳法，1阶或者2阶，那么假定第一次跳的是一阶，那么剩下的是n-1个台阶，跳法是f(n-1);
@@ -68,6 +88,9 @@ e.可以发现最终得出的是一个斐波那契数列：
            | 1, (n=1)
 f(n) =     | 2, (n=2)
            | f(n-1)+f(n-2) ,(n>2,n为整数)
+
+方法2   主要是为了避免重复计算；加快速度
+
 ```
 
 
