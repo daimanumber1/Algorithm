@@ -71,3 +71,44 @@
 ```
 Java代码，通过校验。代码思路如下：两个指针，先让第一个指针和第二个指针都指向头结点，然后再让第一个指正走(k-1)步，到达第k个节点。然后两个指针同时往后移动，当第一个结点到达末尾的时候，第二个结点所在位置就是倒数第k个节点了。。
 ```
+
+
+#3
+题目描述
+输入一个链表，反转链表后，输出链表的所有元素。
+
+    /*
+    public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+    }*/
+    public class Solution {
+    public ListNode ReverseList(ListNode head) {
+        if(head ==null)return null;
+        ListNode pre = null;
+        ListNode curr = head;
+        ListNode nex = head.next;
+        while(curr != null){
+            curr.next = pre;
+             pre = curr;
+            curr = nex;
+            if(curr == null){
+                nex =null;
+            }else{
+               nex = curr.next; 
+            }
+           
+        };
+        return pre;
+    }
+    }
+    
+```
+根据题目描述可知为：单链表，因此 用指针来代表下标；
+其实这题用2个指针就可以了；
+
+```
