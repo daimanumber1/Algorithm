@@ -112,3 +112,40 @@ Java代码，通过校验。代码思路如下：两个指针，先让第一个�
 其实这题用2个指针就可以了；
 
 ```
+
+
+#4
+题目描述
+输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+
+    /*
+    public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+    }*/
+    public class Solution {
+    public ListNode Merge(ListNode list1,ListNode list2) {
+       if(list1 == null){
+           return list2;
+       }
+       if(list2 == null){
+           return list1;
+        }
+        if(list1.val <= list2.val){
+            list1.next = Merge(list1.next, list2);
+            return list1;
+        }else{
+            list2.next = Merge(list1, list2.next);
+            return list2;
+            }
+    }
+    }
+    
+```
+解题思路:  用递归的最简单的方法就是用极限思维；
+即 list1==null 或者 list1 = 1； list2 = 2  时 递归
+```
