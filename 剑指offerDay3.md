@@ -149,3 +149,65 @@ Java代码，通过校验。代码思路如下：两个指针，先让第一个�
 解题思路:  用递归的最简单的方法就是用极限思维；
 即 list1==null 或者 list1 = 1； list2 = 2  时 递归
 ```
+
+#5
+
+题目描述
+输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+
+
+    /**
+    public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+    }
+    */
+    public class Solution {
+    public boolean HasSubtree(TreeNode root1,TreeNode root2) {
+        boolean result = false;
+        if(root1 != null && root2 !=null){
+            if(root1.val == root2.val){
+                result = check(root1,root2);
+            }
+            if(!result){
+                result = check(root1.left,root2);
+            }
+            if(!result){
+                result = check(root1.right,root2);
+            }
+        }
+          return result; 
+    }
+    public static boolean check(TreeNode startNode,TreeNode checkNode){
+        if(checkNode == null){
+            return true;
+        }
+        if(startNode == null ){
+            return false; 
+        }
+        if(startNode.val!=checkNode.val){
+            return false;
+        }
+        return check(startNode.left,checkNode.left) && check(startNode.right,checkNode.right);
+    }
+    }
+    
+    
+```
+    这题难题挺大无法理解；
+    if(checkNode == null){
+            return true;
+        }
+        if(startNode == null ){
+            return false; 
+        }
+        这2行的位置不能互换，换了就出错
+    
+```
